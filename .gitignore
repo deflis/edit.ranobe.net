@@ -31,3 +31,6 @@ yarn-error.log*
 
 # turbo
 .turbo
+
+# css module type
+*.module.css.d.ts
