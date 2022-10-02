@@ -1,1 +1,1 @@
-export const useNoop = () => {};
+export * from "./texts";

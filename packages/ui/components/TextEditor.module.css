@@ -1,0 +1,5 @@
+.editor {
+  @apply font-serif;
+  @apply h-full w-full;
+  @apply resize-none;
+}
