@@ -6,5 +6,5 @@
 
 
 #root {
-  @apply w-screen h-screen overflow-auto;
+  @apply w-screen h-screen overflow-hidden;
 }

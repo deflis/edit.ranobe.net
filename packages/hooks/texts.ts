@@ -1,8 +1,9 @@
 import { atom, useAtomValue, useSetAtom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 import { parse, length, lengthForParse } from "parser";
 import { useCallback } from "react";
 
-export const textAtom = atom("");
+export const textAtom = atomWithStorage("texts", "");
 
 export const parsedTextAtom = atom((get) => parse(get(textAtom)));
 export const textLengthAtom = atom((get) => length(get(textAtom)));
