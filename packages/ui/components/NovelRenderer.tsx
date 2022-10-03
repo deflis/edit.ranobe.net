@@ -1,26 +1,29 @@
 import { useParsedText } from "hooks";
 import { NovelLineElement } from "parser";
-import { Fragment } from "react";
+import { forwardRef, Fragment } from "react";
 import { container } from "./NovelRenderer.module.css";
+import clsx from "clsx";
 
-export const NovelRenderer: React.FC = () => {
-  const story = useParsedText();
-  return (
-    <div className={container}>
-      {story.map((line, lineIndex) => (
-        <p key={lineIndex}>
-          {line.map((element, elementIndex) => (
-            <LineElementRender
-              lineElement={element}
-              key={`${lineIndex}-${elementIndex}`}
-            />
-          ))}
-          {line.length === 0 && "\u00A0"}
-        </p>
-      ))}
-    </div>
-  );
-};
+export const NovelRenderer = forwardRef<HTMLDivElement, { className?: string }>(
+  ({ className }, ref) => {
+    const story = useParsedText();
+    return (
+      <div ref={ref} className={clsx(container, className)}>
+        {story.map((line, lineIndex) => (
+          <p key={lineIndex}>
+            {line.map((element, elementIndex) => (
+              <LineElementRender
+                lineElement={element}
+                key={`${lineIndex}-${elementIndex}`}
+              />
+            ))}
+            {line.length === 0 && "\u00A0"}
+          </p>
+        ))}
+      </div>
+    );
+  }
+);
 
 const LineElementRender: React.VFC<{
   lineElement: NovelLineElement;
