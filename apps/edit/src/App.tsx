@@ -1,10 +1,15 @@
 import { SplitSyncContainer } from "ui/components/SplitSyncContainer";
+import { StatusBar } from "ui/components/StatusBar";
+import { MenuBar } from "ui/components/MenuBar";
 
 function App() {
   return (
     <>
-      <SplitSyncContainer />
-      <div>Status bar</div>
+      <div className="grid grid-rows-layout h-full">
+        <MenuBar />
+        <SplitSyncContainer />
+        <StatusBar />
+      </div>
     </>
   );
 }

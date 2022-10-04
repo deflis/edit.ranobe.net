@@ -1,0 +1,9 @@
+.statusbar {
+  @apply flex;
+  @apply text-slate-100 bg-indigo-900;
+  @apply font-status align-middle text-sm;
+  @apply space-x-4;
+  & svg {
+    @apply m-0 p-0 h-4 w-4 align-middle inline-block;
+  }
+}

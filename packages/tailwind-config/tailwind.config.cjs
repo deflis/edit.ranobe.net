@@ -1,5 +1,8 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
+const header = defaultTheme.fontSize.sm[1].lineHeight;
+const footer = defaultTheme.fontSize.sm[1].lineHeight;
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -10,6 +13,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      gridTemplateRows: {
+        layout: `${header} calc(100% - ${header} - ${footer}) ${footer}`,
+      },
       fontFamily: {
         sans: [
           "Helvetica Neue",
@@ -40,6 +46,23 @@ module.exports = {
           "HGS明朝B",
           "HG明朝B",
           ...defaultTheme.fontFamily.serif,
+        ],
+        status: [
+          "Roboto",
+          "Helvetica Neue",
+          "Helvetica",
+          "Arial",
+          "ヒラギノ角ゴ Pr6N",
+          "Hiragino Kaku Gothic Pr6N",
+          "ヒラギノ角ゴ ProN",
+          "Hiragino Kaku Gothic ProN",
+          "ヒラギノ角ゴ StdN",
+          "Hiragino Kaku Gothic StdN",
+          "Segoe UI",
+          "Verdana",
+          "メイリオ",
+          "Meiryo",
+          ...defaultTheme.fontFamily.sans,
         ],
       },
     },
