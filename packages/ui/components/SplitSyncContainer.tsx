@@ -4,15 +4,15 @@ import { TextEditor } from "./TextEditor";
 import { gutter } from "./SplitSyncContainer.module.css";
 import clsx from "clsx";
 import { atom } from "jotai";
-import { useScrollPositon } from "hooks";
+import { useScrollPosition } from "hooks";
 
 const scrollAtom = atom(0);
 
 export const SplitSyncContainer: React.FC<{ className?: string }> = ({
   className,
 }) => {
-  const ref1 = useScrollPositon<HTMLTextAreaElement>(scrollAtom);
-  const ref2 = useScrollPositon<HTMLDivElement>(scrollAtom);
+  const ref1 = useScrollPosition<HTMLTextAreaElement>(scrollAtom);
+  const ref2 = useScrollPosition<HTMLDivElement>(scrollAtom);
   return (
     <Split
       className={clsx("flex w-full h-full", className)}

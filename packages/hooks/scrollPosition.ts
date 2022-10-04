@@ -3,7 +3,7 @@ import { useAtom, PrimitiveAtom } from "jotai";
 
 const timeoutMs = 10 as const;
 
-export const useScrollPositon = <T extends Element>(
+export const useScrollPosition = <T extends Element>(
   atom: PrimitiveAtom<number>
 ) => {
   const ref = useRef<T | null>(null);
