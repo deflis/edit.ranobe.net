@@ -1,6 +1,6 @@
 import Split from "react-split";
-import { NovelRenderer } from "./NovelRenderer";
-import { TextEditor } from "./TextEditor";
+import { NovelRenderer } from "../parts/NovelRenderer";
+import { TextEditor } from "../parts/TextEditor";
 import { gutter } from "./SplitSyncContainer.module.css";
 import clsx from "clsx";
 import { atom } from "jotai";

@@ -1,4 +1,4 @@
-import { SplitSyncContainer } from "ui/components/SplitSyncContainer";
+import { SplitSyncContainer } from "ui/components/containers/SplitSyncContainer";
 import { StatusBar } from "ui/components/StatusBar";
 import { MenuBar } from "ui/components/MenuBar";
 
