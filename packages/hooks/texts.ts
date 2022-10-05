@@ -12,6 +12,7 @@ export const textLengthForParseAtom = atom((get) =>
 );
 
 export const useText = () => useAtomValue(textAtom);
+export const useSetText = () => useSetAtom(textAtom);
 export const useHandleChangeText: () => React.ChangeEventHandler<HTMLTextAreaElement> =
   () => {
     const setText = useSetAtom(textAtom);

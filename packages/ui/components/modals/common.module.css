@@ -1,0 +1,66 @@
+.dialog {
+  @apply relative z-10;
+}
+
+.backdrop {
+  @apply fixed inset-0 bg-black bg-opacity-25;
+}
+
+.animation_enter {
+  @apply ease-out duration-300;
+}
+
+.animation_enterFrom {
+  @apply opacity-0;
+}
+
+.animation_enterTo {
+  @apply opacity-100;
+}
+
+.animation_leave {
+  @apply ease-in duration-200;
+}
+
+.animation_leaveFrom {
+  @apply opacity-100;
+}
+
+.animation_leaveTo {
+  @apply opacity-0;
+}
+
+.dialog_main {
+  @apply fixed inset-0 overflow-y-auto;
+
+  & .dialog_panel {
+    @apply w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all;
+    @apply space-y-2;
+  }
+
+  & .dialog_title {
+    @apply text-lg font-medium leading-6 text-gray-900;
+  }
+
+  & .animation_enter {
+  }
+
+  & .animation_enterFrom {
+    @apply scale-95;
+  }
+
+  & .animation_enterTo {
+    @apply scale-100;
+  }
+
+  & .animation_leave {
+  }
+
+  & .animation_leaveFrom {
+    @apply scale-100;
+  }
+
+  & .animation_leaveTo {
+    @apply scale-95;
+  }
+}

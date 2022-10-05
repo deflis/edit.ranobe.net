@@ -9,9 +9,11 @@ import {
 } from "./MenuBar.module.css";
 import { BsCheck, BsFileTextFill } from "react-icons/bs";
 import { Menu, Transition } from "@headlessui/react";
+import { useOpenOpenFileModal } from "./modals/OpenFileModal";
 
 export const MenuBar = forwardRef<HTMLDivElement, { className?: string }>(
   ({ className }, ref) => {
+    const openOpenFileModal = useOpenOpenFileModal();
     return (
       <header ref={ref} className={clsx(menubar, className)}>
         <span>
@@ -33,7 +35,10 @@ export const MenuBar = forwardRef<HTMLDivElement, { className?: string }>(
               <div>
                 <Menu.Item>
                   {({ active }) => (
-                    <button className={clsx(item, active && item_active)}>
+                    <button
+                      className={clsx(item, active && item_active)}
+                      onClick={openOpenFileModal}
+                    >
                       開く
                     </button>
                   )}
