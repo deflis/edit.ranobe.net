@@ -1,7 +1,6 @@
-import { useCallback, useState, Fragment } from "react";
-import { useDropzone } from "react-dropzone";
+import { useCallback, Fragment } from "react";
+import { useDrop } from "hooks";
 import { Dialog, Transition } from "@headlessui/react";
-import { useSetText } from "hooks";
 import {
   animation_enter,
   animation_enterFrom,
@@ -25,41 +24,11 @@ export const useOpenOpenFileModal = () => {
   return useCallback(() => setIsOpen(true), [setIsOpen]);
 };
 
-const loadTextAsync = (file: File) =>
-  new Promise<string>((resolve, reject) => {
-    const reader = new FileReader();
-
-    reader.addEventListener("load", () => {
-      const { result } = reader;
-      if (typeof result !== "string")
-        throw TypeError("Reader did not return string.");
-      resolve(result);
-    });
-
-    reader.addEventListener("error", () => {
-      reject(reader.error);
-    });
-
-    reader.readAsText(file);
-  });
-
 export const OpenFileModal = () => {
   const [isOpen, setIsOpen] = useAtom(isOpenAtom);
   const closeModal = useCallback(() => setIsOpen(false), [setIsOpen]);
 
-  const setText = useSetText();
-
-  const onDrop = useCallback(async ([file]: File[]) => {
-    setText(await loadTextAsync(file));
-    closeModal();
-  }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    accept: {
-      "text/plain": [],
-    },
-    onDrop,
-    maxFiles: 1,
-  });
+  const { getRootProps, getInputProps } = useDrop(closeModal);
 
   return (
     <Transition appear show={isOpen} as={Fragment}>

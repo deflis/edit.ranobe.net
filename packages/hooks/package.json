@@ -10,6 +10,7 @@
   "dependencies": {
     "jotai": "^1.8.4",
     "parser": "*",
+    "react-dropzone": "^14.2.2",
     "react-use": "^17.4.0"
   },
   "devDependencies": {
