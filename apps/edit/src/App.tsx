@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <OpenFileModal />
-      <div className="grid grid-rows-layout h-full">
+      <div className="container">
         <MenuBar />
         <SplitSyncContainer />
         <StatusBar />
