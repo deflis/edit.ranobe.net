@@ -9,6 +9,6 @@
   @apply w-screen h-screen overflow-hidden;
 }
 
-.container {
-  @apply grid grid-rows-layout h-full;
+.content {
+  @apply grid grid-rows-layout h-full w-full;
 }

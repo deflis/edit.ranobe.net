@@ -1,7 +1,12 @@
 import Split from "react-split";
 import { NovelRenderer } from "../parts/NovelRenderer";
 import { TextEditor } from "../parts/TextEditor";
-import { gutter } from "./SplitSyncContainer.module.css";
+import {
+  container,
+  split_container,
+  split_container_internal,
+  gutter,
+} from "./SplitSyncContainer.module.css";
 import clsx from "clsx";
 import { atom } from "jotai";
 import { useScrollPosition } from "hooks";
@@ -15,7 +20,7 @@ export const SplitSyncContainer: React.FC<{ className?: string }> = ({
   const ref2 = useScrollPosition<HTMLDivElement>(scrollAtom);
   return (
     <Split
-      className={clsx("flex w-full h-full", className)}
+      className={clsx(container, className)}
       gutter={() => {
         const gutterElement = document.createElement("div");
         // ガター幅、ホバー時の挙動、アニメーションを指定
@@ -27,11 +32,11 @@ export const SplitSyncContainer: React.FC<{ className?: string }> = ({
       gutterStyle={() => ({})}
       sizes={[50, 50]}
     >
-      <div className="h-full">
-        <TextEditor className="mx-auto" ref={ref1} />
+      <div className={split_container}>
+        <TextEditor className={split_container_internal} ref={ref1} />
       </div>
-      <div className="h-full mx-auto">
-        <NovelRenderer className="mx-auto" ref={ref2} />
+      <div className={split_container}>
+        <NovelRenderer className={split_container_internal} ref={ref2} />
       </div>
     </Split>
   );

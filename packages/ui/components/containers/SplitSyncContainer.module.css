@@ -1,10 +1,19 @@
 .container {
   @apply flex w-full h-full;
+  @apply bg-gray-200;
 }
-
 
 .gutter {
   @apply w-[2px] bg-indigo-500;
   @apply hover:cursor-col-resize hover:w-4 hover:border-x hover:bg-indigo-700;
   @apply transition-all delay-300 duration-300 ease-in-out;
+}
+
+.split_container {
+  @apply h-full;
+}
+
+.split_container_internal {
+  @apply bg-white;
+  @apply mx-auto;
 }
