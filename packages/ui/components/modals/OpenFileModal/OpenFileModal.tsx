@@ -14,6 +14,7 @@ import {
   dialog_main,
   dialog_panel,
   dialog_title,
+  button,
 } from "../common.module.css";
 import { atom, useAtom, useSetAtom } from "jotai";
 import { dropzone, icon } from "./OpenFileModal.module.css";
@@ -71,11 +72,7 @@ export const OpenFileModal = () => {
                 </div>
 
                 <div>
-                  <button
-                    type="button"
-                    className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                    onClick={closeModal}
-                  >
+                  <button type="button" className={button} onClick={closeModal}>
                     キャンセル
                   </button>
                 </div>
