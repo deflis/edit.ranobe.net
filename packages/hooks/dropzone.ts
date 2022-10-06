@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import { useDropzone } from "react-dropzone";
+import toast from "react-hot-toast";
 import { useSetText } from "./texts";
 
 const loadTextAsync = (file: File) =>
@@ -23,9 +24,18 @@ const loadTextAsync = (file: File) =>
 export const useDrop = (onFinished: () => void) => {
   const setText = useSetText();
 
-  const onDrop = useCallback(async ([file]: File[]) => {
-    setText(await loadTextAsync(file));
-    onFinished();
+  const onDrop = useCallback(([file]: File[]) => {
+    toast.promise(
+      (async () => {
+        setText(await loadTextAsync(file));
+        onFinished();
+      })(),
+      {
+        loading: "読み込み中",
+        success: "読み込みに成功しました",
+        error: "読み込みに失敗しました",
+      }
+    );
   }, []);
   return useDropzone({
     accept: {
