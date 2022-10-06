@@ -10,9 +10,13 @@ export const exportForNarou = (novel: NovelLines) => {
 export const exportForPixiv = (novel: NovelLines) => {
   novel.map((line) => line.map(lineElementRenderForPixiv).join()).join("\n");
 };
+const regexpForParseNotRuby = /^[《（].+[》）]|《《(.+)》》$/;
 
 function lineElementRenderForKakuyomu(lineElement: NovelLineElement): string {
   if (typeof lineElement === "string") {
+    if (regexpForParseNotRuby.test(lineElement)) {
+      return `|${lineElement}`;
+    }
     return lineElement;
   }
 
@@ -26,6 +30,9 @@ function lineElementRenderForKakuyomu(lineElement: NovelLineElement): string {
 
 function lineElementRenderForNarou(lineElement: NovelLineElement): string {
   if (typeof lineElement === "string") {
+    if (regexpForParseNotRuby.test(lineElement)) {
+      return `|${lineElement}`;
+    }
     return lineElement;
   }
 
