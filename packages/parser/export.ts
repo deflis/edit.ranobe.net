@@ -1,14 +1,20 @@
 import { NovelLines, NovelLineElement } from "./types";
 
 export const exportForKakuyomu = (novel: NovelLines) => {
-  novel.map((line) => line.map(lineElementRenderForKakuyomu).join()).join("\n");
+  return novel
+    .map((line) => line.map(lineElementRenderForKakuyomu).join(""))
+    .join("\n");
 };
 export const exportForNarou = (novel: NovelLines) => {
-  novel.map((line) => line.map(lineElementRenderForNarou).join()).join("\n");
+  return novel
+    .map((line) => line.map(lineElementRenderForNarou).join(""))
+    .join("\n");
 };
 
 export const exportForPixiv = (novel: NovelLines) => {
-  novel.map((line) => line.map(lineElementRenderForPixiv).join()).join("\n");
+  return novel
+    .map((line) => line.map(lineElementRenderForPixiv).join(""))
+    .join("\n");
 };
 const regexpForParseNotRuby = /^[《（].+[》）]|《《(.+)》》$/;
 
@@ -42,7 +48,7 @@ function lineElementRenderForNarou(lineElement: NovelLineElement): string {
     case "bouten":
       return Array.from(lineElement.text)
         .map((s) => rubyForNarou(s, "・"))
-        .join();
+        .join("");
   }
 }
 
@@ -61,7 +67,7 @@ function lineElementRenderForPixiv(lineElement: NovelLineElement): string {
     case "bouten":
       return Array.from(lineElement.text)
         .map((s) => rubyForPixiv(s, "・"))
-        .join();
+        .join("");
   }
 }
 

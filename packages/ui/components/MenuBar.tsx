@@ -10,10 +10,12 @@ import {
 import { BsCheck, BsFileTextFill } from "react-icons/bs";
 import { Menu, Transition } from "@headlessui/react";
 import { useOpenOpenFileModal } from "./modals/OpenFileModal";
+import { useOpenSaveFileModal } from "./modals/SaveFileModal";
 
 export const MenuBar = forwardRef<HTMLDivElement, { className?: string }>(
   ({ className }, ref) => {
     const openOpenFileModal = useOpenOpenFileModal();
+    const openSaveFileModal = useOpenSaveFileModal();
     return (
       <header ref={ref} className={clsx(menubar, className)}>
         <span>
@@ -45,7 +47,10 @@ export const MenuBar = forwardRef<HTMLDivElement, { className?: string }>(
                 </Menu.Item>
                 <Menu.Item>
                   {({ active }) => (
-                    <button className={clsx(item, active && item_active)}>
+                    <button
+                      className={clsx(item, active && item_active)}
+                      onClick={openSaveFileModal}
+                    >
                       保存する
                     </button>
                   )}
