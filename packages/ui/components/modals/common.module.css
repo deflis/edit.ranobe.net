@@ -32,6 +32,9 @@
 
 .dialog_main {
   @apply fixed inset-0 overflow-y-auto;
+  & > * {
+    @apply flex min-h-full items-center justify-center p-4 text-center;
+  }
 
   & .dialog_panel {
     @apply w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all;
@@ -40,6 +43,10 @@
 
   & .dialog_title {
     @apply text-lg font-medium leading-6 text-gray-900;
+  }
+
+  & .dialog_description {
+    @apply text-sm text-gray-500;
   }
 
   & .animation_enter {

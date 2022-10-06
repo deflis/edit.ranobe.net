@@ -10,6 +10,7 @@ import {
   animation_leaveTo,
   backdrop,
   dialog,
+  dialog_description,
   dialog_main,
   dialog_panel,
   dialog_title,
@@ -46,7 +47,7 @@ export const OpenFileModal = () => {
         </Transition.Child>
 
         <div className={dialog_main}>
-          <div className="flex min-h-full items-center justify-center p-4 text-center">
+          <div>
             <Transition.Child
               as={Fragment}
               enter={animation_enter}
@@ -60,7 +61,7 @@ export const OpenFileModal = () => {
                 <Dialog.Title as="h3" className={dialog_title}>
                   ファイルを開く
                 </Dialog.Title>
-                <Dialog.Description className="text-sm text-gray-500">
+                <Dialog.Description className={dialog_description}>
                   ファイルを開いてエディターに取り込みます。(UTF-8以外のファイルは文字化けします)
                 </Dialog.Description>
                 <div {...getRootProps({ className: dropzone })}>
