@@ -43,11 +43,46 @@ export const useOpenSaveFileModal = () => {
   return useCallback(() => setIsOpen(true), [setIsOpen]);
 };
 
-const exportTypeNotation: { [type in ExportType]: string } = {
-  [ExportType.Raw]: "そのまま出力",
-  [ExportType.Narou]: "なろう形式で出力",
-  [ExportType.Kakuyomu]: "カクヨム形式で出力",
-  [ExportType.Pixiv]: "pixiv形式で出力",
+const exportTypeNotation: {
+  [type in ExportType]: {
+    title: React.ReactNode;
+    description: React.ReactNode;
+  };
+} = {
+  [ExportType.Raw]: {
+    title: "そのまま出力",
+    description: "加工せず出力します。",
+  },
+  [ExportType.Narou]: {
+    title: "なろう形式で出力",
+    description: (
+      <>
+        ルビを《》で括って出力します。
+        <br />
+        傍点は1文字づつ中黒のルビが付きます。
+      </>
+    ),
+  },
+  [ExportType.Kakuyomu]: {
+    title: "カクヨム形式で出力",
+    description: (
+      <>
+        ルビを《》で括って出力します。
+        <br />
+        傍点は《《》》で括って出力します。
+      </>
+    ),
+  },
+  [ExportType.Pixiv]: {
+    title: "pixiv形式で出力",
+    description: (
+      <>
+        ルビを[rb: ]で括って出力します。
+        <br />
+        傍点は1文字づつ中黒のルビが付きます。
+      </>
+    ),
+  },
 };
 
 export const SaveFileModal = () => {
@@ -116,13 +151,13 @@ export const SaveFileModal = () => {
                                   as="p"
                                   className={radio_item_label}
                                 >
-                                  {exportTypeNotation[exportType]}
+                                  {exportTypeNotation[exportType].title}
                                 </RadioGroup.Label>
                                 <RadioGroup.Description
                                   as="span"
                                   className={radio_item_description}
                                 >
-                                  にゃーん
+                                  {exportTypeNotation[exportType].description}
                                 </RadioGroup.Description>
                               </div>
                             </div>
