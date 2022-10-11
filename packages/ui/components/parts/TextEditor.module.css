@@ -2,7 +2,10 @@
   @apply font-serif;
   @apply h-full w-full;
   @apply resize-none;
-  @apply max-w-[665px];
   @apply overflow-y-scroll;
   @apply block;
+
+  &.limit {
+    @apply max-w-[665px];
+  }
 }

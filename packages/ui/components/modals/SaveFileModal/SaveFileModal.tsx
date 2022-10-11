@@ -28,7 +28,12 @@ import {
   radio_item_label,
   radio_item_text,
 } from "./SaveFileModal.module.css";
-import { ExportType, useSaveToClipboard, useSaveToFile } from "hooks";
+import {
+  ExportType,
+  useHotKey,
+  useSaveToClipboard,
+  useSaveToFile,
+} from "hooks";
 import { BsCheck } from "react-icons/bs";
 import clsx from "clsx";
 
@@ -51,7 +56,7 @@ export const SaveFileModal = () => {
   const closeModal = useCallback(() => setIsOpen(false), [setIsOpen]);
   const saveToClipboard = useSaveToClipboard(closeModal, exportType);
   const saveToFile = useSaveToFile(closeModal, exportType);
-
+  useHotKey();
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className={dialog} onClose={closeModal}>

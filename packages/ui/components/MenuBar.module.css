@@ -20,9 +20,13 @@
   @apply absolute left-0 mt-2 w-48 origin-top-left;
   @apply divide-y divide-gray-100;
   @apply rounded-sm bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none;
-  
+
   & > div {
     @apply p-1;
+  }
+
+  hr {
+    @apply my-4 h-px bg-gray-200 border-0;
   }
 }
 

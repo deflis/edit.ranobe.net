@@ -1,14 +1,18 @@
 import { useParsedText } from "hooks";
 import { NovelLineElement } from "parser";
 import { forwardRef, Fragment } from "react";
-import { container } from "./NovelRenderer.module.css";
+import { container, limit } from "./NovelRenderer.module.css";
 import clsx from "clsx";
+import { useWidthMode } from "../containers/Container";
 
 export const NovelRenderer = forwardRef<HTMLDivElement, { className?: string }>(
   ({ className }, ref) => {
     const story = useParsedText();
     return (
-      <div ref={ref} className={clsx(container, className)}>
+      <div
+        ref={ref}
+        className={clsx(container, useWidthMode() && limit, className)}
+      >
         {story.map((line, lineIndex) => (
           <p key={lineIndex}>
             {line.map((element, elementIndex) => (

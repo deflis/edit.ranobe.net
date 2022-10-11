@@ -1,0 +1,9 @@
+.container {
+  @apply w-full h-full;
+  @apply bg-gray-200;
+}
+
+.container_internal {
+  @apply bg-white;
+  @apply mx-auto;
+}
