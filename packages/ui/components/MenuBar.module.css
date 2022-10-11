@@ -25,8 +25,8 @@
     @apply p-1;
   }
 
-  hr {
-    @apply my-4 h-px bg-gray-200 border-0;
+  & hr {
+    @apply my-1 h-px bg-gray-200 border-0;
   }
 }
 
