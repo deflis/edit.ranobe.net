@@ -22,7 +22,7 @@ const containerModeAtom = atomWithStorage<ContainerMode>(
   "previewMode",
   ContainerMode.Preview
 );
-const fontModeAtom = atomWithStorage<FontMode>("fontMode", FontMode.Sans);
+const fontModeAtom = atomWithStorage<FontMode>("fontMode", FontMode.Serif);
 
 export const useContainerMode = () => useAtomValue(containerModeAtom);
 export const useSetContainerMode = () => useSetAtom(containerModeAtom);
