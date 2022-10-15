@@ -12,3 +12,7 @@
 .content {
   @apply grid grid-rows-layout h-full w-full;
 }
+
+a {
+  @apply text-indigo-800 hover:text-indigo-600 hover:underline;
+}

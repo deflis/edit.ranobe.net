@@ -18,6 +18,7 @@ import {
   useWidthMode,
   useSetWidthMode,
 } from "./containers/Container";
+import { useOpenVersionModal } from "./modals/VersionModal";
 
 const resolveContainerMode = (containerMode: ContainerMode) => {
   switch (containerMode) {
@@ -51,6 +52,7 @@ export const MenuBar = forwardRef<HTMLDivElement, { className?: string }>(
 
     const openOpenFileModal = useOpenOpenFileModal();
     const openSaveFileModal = useOpenSaveFileModal();
+    const openVersionModal = useOpenVersionModal();
 
     return (
       <header ref={ref} className={clsx(menubar, className)}>
@@ -139,6 +141,33 @@ export const MenuBar = forwardRef<HTMLDivElement, { className?: string }>(
                     >
                       {widthMode && <BsCheck />}
                       横幅を制限する
+                    </button>
+                  )}
+                </Menu.Item>
+              </div>
+            </Menu.Items>
+          </Transition>
+        </Menu>
+        <Menu as="div" className={menuitem}>
+          <Menu.Button>ヘルプ</Menu.Button>
+          <Transition
+            as={Fragment}
+            enter="transition ease-out duration-100"
+            enterFrom="transform opacity-0 scale-95"
+            enterTo="transform opacity-100 scale-100"
+            leave="transition ease-in duration-75"
+            leaveFrom="transform opacity-100 scale-100"
+            leaveTo="transform opacity-0 scale-95"
+          >
+            <Menu.Items className={items}>
+              <div>
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      className={clsx(item, active && item_active)}
+                      onClick={openVersionModal}
+                    >
+                      バージョン情報
                     </button>
                   )}
                 </Menu.Item>
