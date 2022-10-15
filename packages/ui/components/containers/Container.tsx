@@ -1,10 +1,10 @@
-import { TextEditor } from "../parts/TextEditor";
-import { SplitSyncContainer } from "./SplitSyncContainer";
-import { container, container_internal } from "./Container.module.css";
-
+import clsx from "clsx";
+import { useAtomValue, useSetAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import { useAtomValue } from "jotai";
-import { useSetAtom } from "jotai";
+
+import { TextEditor } from "../parts/TextEditor";
+import { container, container_internal, serif } from "./Container.module.css";
+import { SplitSyncContainer } from "./SplitSyncContainer";
 
 export const ContainerMode = {
   Edit: "edit",
@@ -12,29 +12,43 @@ export const ContainerMode = {
 } as const;
 export type ContainerMode = typeof ContainerMode[keyof typeof ContainerMode];
 
+export const FontMode = {
+  Sans: "sans",
+  Serif: "serif",
+} as const;
+export type FontMode = typeof FontMode[keyof typeof FontMode];
+
 const containerModeAtom = atomWithStorage<ContainerMode>(
   "previewMode",
-  ContainerMode.Edit
+  ContainerMode.Preview
 );
+const fontModeAtom = atomWithStorage<FontMode>("fontMode", FontMode.Sans);
 
 export const useContainerMode = () => useAtomValue(containerModeAtom);
 export const useSetContainerMode = () => useSetAtom(containerModeAtom);
+export const useFontMode = () => useAtomValue(fontModeAtom);
+export const useSetFontMode = () => useSetAtom(fontModeAtom);
 
-const widthMode = atomWithStorage("widthLimit", false);
+const widthMode = atomWithStorage("widthLimit", true);
 
 export const useWidthMode = () => useAtomValue(widthMode);
 export const useSetWidthMode = () => useSetAtom(widthMode);
 
 export const Container: React.FC<{}> = ({}) => {
+  const fontMode = useFontMode();
   const containerMode = useContainerMode();
   return (
     <>
       {containerMode == ContainerMode.Edit && (
-        <div className={container}>
+        <div className={clsx(container, fontMode === FontMode.Serif && serif)}>
           <TextEditor className={container_internal} />
         </div>
       )}
-      {containerMode == ContainerMode.Preview && <SplitSyncContainer />}
+      {containerMode == ContainerMode.Preview && (
+        <SplitSyncContainer
+          className={clsx(container, fontMode === FontMode.Serif && serif)}
+        />
+      )}
     </>
   );
 };

@@ -6,6 +6,7 @@ import {
   items,
   item,
   item_active,
+  icon,
 } from "./MenuBar.module.css";
 import { BsCheck, BsFileTextFill } from "react-icons/bs";
 import { Menu, Transition } from "@headlessui/react";
@@ -17,6 +18,9 @@ import {
   useSetContainerMode,
   useWidthMode,
   useSetWidthMode,
+  useFontMode,
+  useSetFontMode,
+  FontMode,
 } from "./containers/Container";
 import { useOpenVersionModal } from "./modals/VersionModal";
 
@@ -35,15 +39,24 @@ export const MenuBar = forwardRef<HTMLDivElement, { className?: string }>(
     const setContainerMode = useSetContainerMode();
     const widthMode = useWidthMode();
     const setWidthMode = useSetWidthMode();
+    const fontMode = useFontMode();
+    const setFontMode = useSetFontMode();
 
     const setContainerModeEdit = useCallback(
       () => setContainerMode(ContainerMode.Edit),
       [setContainerMode]
     );
-
     const setContainerModePreview = useCallback(
       () => setContainerMode(ContainerMode.Preview),
       [setContainerMode]
+    );
+    const setFontModeSerif = useCallback(
+      () => setFontMode(FontMode.Serif),
+      [setFontMode]
+    );
+    const setFontModeSans = useCallback(
+      () => setFontMode(FontMode.Sans),
+      [setFontMode]
     );
     const toggleWidthMode = useCallback(
       () => setWidthMode((flag) => !flag),
@@ -116,7 +129,11 @@ export const MenuBar = forwardRef<HTMLDivElement, { className?: string }>(
                       className={clsx(item, active && item_active)}
                       onClick={setContainerModeEdit}
                     >
-                      {containerMode === ContainerMode.Edit && <BsCheck />}
+                      {containerMode === ContainerMode.Edit ? (
+                        <BsCheck />
+                      ) : (
+                        <span className={icon} />
+                      )}
                       編集モード
                     </button>
                   )}
@@ -127,8 +144,43 @@ export const MenuBar = forwardRef<HTMLDivElement, { className?: string }>(
                       className={clsx(item, active && item_active)}
                       onClick={setContainerModePreview}
                     >
-                      {containerMode === ContainerMode.Preview && <BsCheck />}
+                      {containerMode === ContainerMode.Preview ? (
+                        <BsCheck />
+                      ) : (
+                        <span className={icon} />
+                      )}
                       プレビューモード
+                    </button>
+                  )}
+                </Menu.Item>
+                <hr />
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      className={clsx(item, active && item_active)}
+                      onClick={setFontModeSans}
+                    >
+                      {fontMode === FontMode.Sans ? (
+                        <BsCheck />
+                      ) : (
+                        <span className={icon} />
+                      )}
+                      ゴシック体
+                    </button>
+                  )}
+                </Menu.Item>
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      className={clsx(item, active && item_active)}
+                      onClick={setFontModeSerif}
+                    >
+                      {fontMode === FontMode.Serif ? (
+                        <BsCheck />
+                      ) : (
+                        <span className={icon} />
+                      )}
+                      明朝体
                     </button>
                   )}
                 </Menu.Item>
@@ -139,7 +191,7 @@ export const MenuBar = forwardRef<HTMLDivElement, { className?: string }>(
                       className={clsx(item, active && item_active)}
                       onClick={toggleWidthMode}
                     >
-                      {widthMode && <BsCheck />}
+                      {widthMode ? <BsCheck /> : <span className={icon} />}
                       横幅を制限する
                     </button>
                   )}

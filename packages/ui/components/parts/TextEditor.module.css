@@ -1,5 +1,4 @@
 .editor {
-  @apply font-serif;
   @apply h-full w-full;
   @apply resize-none;
   @apply overflow-y-scroll;

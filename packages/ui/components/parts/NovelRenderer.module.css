@@ -1,5 +1,4 @@
 .container {
-  @apply font-serif;
   @apply h-full;
   @apply resize-none;
   @apply overflow-y-scroll;
