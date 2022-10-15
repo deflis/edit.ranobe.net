@@ -23,8 +23,6 @@ export const SplitSyncContainer: React.FC<{ className?: string }> = ({
       className={clsx(container, className)}
       gutter={() => {
         const gutterElement = document.createElement("div");
-        // ガター幅、ホバー時の挙動、アニメーションを指定
-        // ※tailwindcssのクラスについては別途公式等参照ください
         gutterElement.className = gutter;
         return gutterElement;
       }}

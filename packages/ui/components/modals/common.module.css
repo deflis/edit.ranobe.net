@@ -49,6 +49,10 @@
     @apply text-sm text-gray-500;
   }
 
+  & .dialog_footer {
+    @apply w-full flex origin-bottom-right space-x-2;
+  }
+
   & .animation_enter {
   }
 
@@ -70,8 +74,4 @@
   & .animation_leaveTo {
     @apply scale-95;
   }
-}
-
-.button {
-  @apply inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2;
 }

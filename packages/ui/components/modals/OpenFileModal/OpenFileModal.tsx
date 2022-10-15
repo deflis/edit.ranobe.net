@@ -11,14 +11,15 @@ import {
   backdrop,
   dialog,
   dialog_description,
+  dialog_footer,
   dialog_main,
   dialog_panel,
   dialog_title,
-  button,
 } from "../common.module.css";
 import { atom, useAtom, useSetAtom } from "jotai";
 import { dropzone, icon } from "./OpenFileModal.module.css";
 import { HiDocumentText } from "react-icons/hi";
+import { Button } from "../../parts/Button";
 
 const isOpenAtom = atom(false);
 export const useOpenOpenFileModal = () => {
@@ -71,10 +72,10 @@ export const OpenFileModal = () => {
                   <span>ここをクリックするか、ここにファイルをドロップ。</span>
                 </div>
 
-                <div>
-                  <button type="button" className={button} onClick={closeModal}>
+                <div className={dialog_footer}>
+                  <Button type="button" onClick={closeModal}>
                     キャンセル
-                  </button>
+                  </Button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

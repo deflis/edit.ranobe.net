@@ -8,9 +8,9 @@ import {
   animation_leaveFrom,
   animation_leaveTo,
   backdrop,
-  button,
   dialog,
   dialog_description,
+  dialog_footer,
   dialog_main,
   dialog_panel,
   dialog_title,
@@ -36,6 +36,7 @@ import {
 } from "hooks";
 import { BsCheck } from "react-icons/bs";
 import clsx from "clsx";
+import { Button } from "../../parts/Button";
 
 const isOpenAtom = atom(false);
 export const useOpenSaveFileModal = () => {
@@ -172,20 +173,16 @@ export const SaveFileModal = () => {
                     )
                   )}
                 </RadioGroup>
-                <div>
-                  <button
-                    type="button"
-                    className={button}
-                    onClick={saveToClipboard}
-                  >
+                <div className={dialog_footer}>
+                  <Button type="button" onClick={saveToClipboard}>
                     クリップボードにコピー
-                  </button>
-                  <button type="button" className={button} onClick={saveToFile}>
+                  </Button>
+                  <Button type="button" onClick={saveToFile}>
                     ファイルに保存
-                  </button>
-                  <button type="button" className={button} onClick={closeModal}>
+                  </Button>
+                  <Button type="button" onClick={closeModal}>
                     キャンセル
-                  </button>
+                  </Button>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
