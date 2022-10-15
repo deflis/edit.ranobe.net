@@ -37,7 +37,7 @@
   }
 
   & .dialog_panel {
-    @apply w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all;
+    @apply w-full max-w-2xl transform rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all;
     @apply space-y-2;
   }
 
