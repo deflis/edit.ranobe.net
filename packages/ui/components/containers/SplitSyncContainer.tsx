@@ -8,57 +8,59 @@ import {
   gutter,
 } from "./SplitSyncContainer.module.css";
 import clsx from "clsx";
-import { atom, useAtom } from "jotai";
-import { useConcurrency, useScrollPosition } from "hooks";
 import { LexicalEditor } from "lexical";
-import { useEffect, useLayoutEffect, useRef } from "react";
-
-const scrollAtom = atom(0);
+import { useEffect, useRef } from "react";
 
 export const SplitSyncContainer: React.FC<{ className?: string }> = ({
   className,
 }) => {
   const editorRef = useRef<LexicalEditor | null>(null);
-  const [scroll, setScroll] = useAtom(scrollAtom);
-  const [isScrolled, invokingScroll] = useConcurrency(10);
-  const [isMoved, invokingMove] = useConcurrency(10);
+  const previewRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const handler = () => {
-      const rootElement = editorRef.current?.getRootElement();
-      if (rootElement && !isMoved) {
-        const current = rootElement.scrollTop / rootElement.scrollHeight;
-        setScroll(current);
+    const editorElement = editorRef.current?.getRootElement();
+    const previewElement = previewRef.current;
 
-        invokingScroll();
-      }
-    };
-    const rootElement = editorRef.current?.getRootElement();
+    if (editorElement && previewElement) {
+      const handler = function (this: HTMLElement) {
+        const thisElement = this;
+        const otherElement =
+          this === editorElement ? previewElement : editorElement;
+        // 他の要素がスクロールイベントをトリガーしないようにする
+        otherElement.removeEventListener("scroll", handler);
 
-    if (rootElement) {
-      rootElement.addEventListener("scroll", handler, {
+        console.log(
+          `scroll by ${thisElement === editorElement ? "editor" : "preview"}`
+        );
+        const top =
+          (otherElement.scrollHeight * thisElement.scrollTop) /
+          thisElement.scrollHeight;
+        const left =
+          (otherElement.scrollWidth * thisElement.scrollLeft) /
+          thisElement.scrollWidth;
+        otherElement.scroll({ top, left });
+        setTimeout(() => {
+          otherElement.addEventListener("scroll", handler, {
+            capture: false,
+            passive: true,
+          });
+        }, 0);
+      };
+      editorElement.addEventListener("scroll", handler, {
         capture: false,
         passive: true,
       });
+      previewElement.addEventListener("scroll", handler, {
+        capture: false,
+        passive: true,
+      });
+      return () => {
+        editorElement.removeEventListener("scroll", handler);
+        previewElement.removeEventListener("scroll", handler);
+      };
     }
+  }, [editorRef, previewRef]);
 
-    return () => {
-      if (rootElement) {
-        rootElement.removeEventListener("scroll", handler);
-      }
-    };
-  }, [editorRef, isMoved, invokingScroll]);
-
-  useLayoutEffect(() => {
-    const rootElement = editorRef.current?.getRootElement();
-    if (rootElement && !isScrolled) {
-      const top = rootElement.scrollHeight * scroll;
-      rootElement.scroll({ top });
-      invokingMove();
-    }
-  }, [editorRef, scroll]);
-
-  const ref2 = useScrollPosition<HTMLDivElement>(scrollAtom);
   return (
     <Split
       className={clsx(container, className)}
@@ -78,7 +80,7 @@ export const SplitSyncContainer: React.FC<{ className?: string }> = ({
         />
       </div>
       <div className={split_container}>
-        <NovelRenderer className={split_container_internal} ref={ref2} />
+        <NovelRenderer className={split_container_internal} ref={previewRef} />
       </div>
     </Split>
   );
