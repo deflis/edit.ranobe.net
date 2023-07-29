@@ -1,5 +1,6 @@
 .dialog {
   @apply relative z-10;
+  @apply select-none;
 }
 
 .backdrop {

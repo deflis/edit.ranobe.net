@@ -3,6 +3,7 @@
   @apply text-slate-100 bg-indigo-900;
   @apply font-status align-middle text-sm;
   @apply space-x-2;
+  @apply select-none;
   & svg, & .icon {
     @apply m-0 p-0 h-4 w-4 align-middle inline-block;
   }
