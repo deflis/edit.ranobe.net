@@ -21,6 +21,8 @@ import {
   useFontMode,
   useSetFontMode,
   FontMode,
+  useSetVerticalMode,
+  useVerticalMode,
 } from "./containers/Container";
 import { useOpenVersionModal } from "./modals/VersionModal";
 
@@ -41,6 +43,8 @@ export const MenuBar = forwardRef<HTMLDivElement, { className?: string }>(
     const setWidthMode = useSetWidthMode();
     const fontMode = useFontMode();
     const setFontMode = useSetFontMode();
+    const verticalMode = useVerticalMode();
+    const setVerticalMode = useSetVerticalMode();
 
     const setContainerModeEdit = useCallback(
       () => setContainerMode(ContainerMode.Edit),
@@ -61,6 +65,10 @@ export const MenuBar = forwardRef<HTMLDivElement, { className?: string }>(
     const toggleWidthMode = useCallback(
       () => setWidthMode((flag) => !flag),
       [setWidthMode]
+    );
+    const toggleVerticalMode = useCallback(
+      () => setVerticalMode((flag) => !flag),
+      [setVerticalMode]
     );
 
     const openOpenFileModal = useOpenOpenFileModal();
@@ -193,6 +201,18 @@ export const MenuBar = forwardRef<HTMLDivElement, { className?: string }>(
                     >
                       {widthMode ? <BsCheck /> : <span className={icon} />}
                       横幅を制限する
+                    </button>
+                  )}
+                </Menu.Item>
+                <hr />
+                <Menu.Item>
+                  {({ active }) => (
+                    <button
+                      className={clsx(item, active && item_active)}
+                      onClick={toggleVerticalMode}
+                    >
+                      {verticalMode ? <BsCheck /> : <span className={icon} />}
+                      縦書きモード（開発中）
                     </button>
                   )}
                 </Menu.Item>

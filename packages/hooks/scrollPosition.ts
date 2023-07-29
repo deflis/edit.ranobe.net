@@ -46,7 +46,7 @@ export const useScrollPosition = <T extends Element>(
   return ref;
 };
 
-const useConcurrency = (timeoutMs: number) => {
+export const useConcurrency = (timeoutMs: number) => {
   const timeout = useRef<ReturnType<typeof setTimeout>>();
   const invoke = useCallback(() => {
     timeout.current && clearTimeout(timeout.current);

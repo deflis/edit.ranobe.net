@@ -3,7 +3,12 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 
 import { TextEditor } from "../parts/TextEditor";
-import { container, container_internal, serif } from "./Container.module.css";
+import {
+  container,
+  container_internal,
+  serif,
+  vertical,
+} from "./Container.module.css";
 import { SplitSyncContainer } from "./SplitSyncContainer";
 
 export const ContainerMode = {
@@ -34,19 +39,36 @@ const widthMode = atomWithStorage("widthLimit", true);
 export const useWidthMode = () => useAtomValue(widthMode);
 export const useSetWidthMode = () => useSetAtom(widthMode);
 
+const verticalMode = atomWithStorage("verticalMode", false);
+
+export const useVerticalMode = () => useAtomValue(verticalMode);
+export const useSetVerticalMode = () => useSetAtom(verticalMode);
+
 export const Container: React.FC<{}> = ({}) => {
   const fontMode = useFontMode();
   const containerMode = useContainerMode();
+  const verticalMode = useVerticalMode();
+
   return (
     <>
       {containerMode == ContainerMode.Edit && (
-        <div className={clsx(container, fontMode === FontMode.Serif && serif)}>
+        <div
+          className={clsx(
+            container,
+            fontMode === FontMode.Serif && serif,
+            verticalMode && vertical
+          )}
+        >
           <TextEditor className={container_internal} />
         </div>
       )}
       {containerMode == ContainerMode.Preview && (
         <SplitSyncContainer
-          className={clsx(container, fontMode === FontMode.Serif && serif)}
+          className={clsx(
+            container,
+            fontMode === FontMode.Serif && serif,
+            verticalMode && vertical
+          )}
         />
       )}
     </>

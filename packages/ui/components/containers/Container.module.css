@@ -8,9 +8,15 @@
   {
     @apply font-serif;
   }
+
+  &.vertical {
+    writing-mode: vertical-rl;
+  }
+  
 }
 
 .container_internal {
   @apply bg-white;
   @apply mx-auto;
 }
+
