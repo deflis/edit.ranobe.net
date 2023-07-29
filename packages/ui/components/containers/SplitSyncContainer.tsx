@@ -29,9 +29,6 @@ export const SplitSyncContainer: React.FC<{ className?: string }> = ({
         // 他の要素がスクロールイベントをトリガーしないようにする
         otherElement.removeEventListener("scroll", handler);
 
-        console.log(
-          `scroll by ${thisElement === editorElement ? "editor" : "preview"}`
-        );
         const top =
           (otherElement.scrollHeight * thisElement.scrollTop) /
           thisElement.scrollHeight;
